@@ -7,8 +7,27 @@ def part1():
             upper = int(id_range.split("-")[1])
             for x in range(lower, upper + 1):
                 x_len = len(str(x))
-                if x_len % 2 == 0 and (str(x)[0:x_len//2] == str(x)[x_len//2:]) :
+                if (str(x)[0:x_len//2] == str(x)[x_len//2:]) :
                     invalid_id += x
+    print(invalid_id)
+    return invalid_id
+
+def part2():
+    with open('puzzleinput.txt', 'r') as f:
+        invalid_id = 0
+        f = f.read().split(",")
+        for id_range in f:
+            lower = int(id_range.split("-")[0])
+            upper = int(id_range.split("-")[1])
+            for x in range(lower, upper + 1):
+                x_len = len(str(x))
+                x_str = str(x)
+                for m in range(1, (x_len // 2) + 1):
+                    if x_len % m == 0:
+                        k = x_len // m
+                    if x_str[:m] * k == x_str:
+                        invalid_id += x
+                        break 
     print(invalid_id)
     return invalid_id
 
@@ -16,4 +35,4 @@ def part1():
 
 
 if __name__ == "__main__":
-    part1()
+    part2()
